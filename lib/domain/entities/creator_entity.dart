@@ -7,7 +7,7 @@ class CreatorEntity extends Equatable {
   final String email;
   final String avatar;
   final String phone;
-  final bool? buyer;
+  final bool buyer;
 
   const CreatorEntity({
     required this.id,
