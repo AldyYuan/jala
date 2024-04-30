@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:jala/core/const/app_const.dart';
 import 'package:jala/core/helpers/api_helper.dart';
 import 'package:jala/data/models/post_model.dart';
@@ -6,6 +7,7 @@ abstract class PostDataSource {
   Future<List<PostModel>> getListPost({int perPage = 20, int page = 1});
 }
 
+@Injectable(as: PostDataSource)
 class PostDataSourceImpl implements PostDataSource {
   final ApiHelper apiHelper;
 

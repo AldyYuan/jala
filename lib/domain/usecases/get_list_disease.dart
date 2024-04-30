@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:jala/core/error/failures.dart';
 import 'package:jala/core/interfaces/base_usecase.dart';
 import 'package:jala/domain/entities/disease_entity.dart';
 import 'package:jala/domain/repositories/disease_repository.dart';
 
+@injectable
 class GetListDisease extends BaseUseCase<List<DiseaseEntity>, GetListDiseaseParams> {
   final DiseaseRepository repository;
 

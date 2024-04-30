@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:jala/core/const/app_const.dart';
 import 'package:jala/core/helpers/api_helper.dart';
 import 'package:jala/data/models/region_model.dart';
@@ -6,6 +7,7 @@ abstract class RegionDataSource {
   Future<List<RegionModel>> getListRegion({String search = ''});
 }
 
+@Injectable(as: RegionDataSource)
 class RegionDataSourceImpl implements RegionDataSource {
   final ApiHelper apiHelper;
 

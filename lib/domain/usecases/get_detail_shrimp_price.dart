@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:injectable/injectable.dart';
 import 'package:jala/core/error/failures.dart';
 import 'package:jala/core/interfaces/base_usecase.dart';
 import 'package:jala/domain/entities/shrimp_price_entity.dart';
 import 'package:jala/domain/repositories/shrimp_price_repository.dart';
 
+@injectable
 class GetDetailShrimpPrice extends BaseUseCase<ShrimpPriceEntity, GetDetailShrimpPriceParams> {
   final ShrimpPriceRepository repository;
 

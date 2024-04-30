@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:jala/core/const/app_const.dart';
 import 'package:jala/core/helpers/api_helper.dart';
 import 'package:jala/data/models/shrimp_price_model.dart';
@@ -14,6 +15,7 @@ abstract class ShrimpPriceDataSource {
   });
 }
 
+@Injectable(as: ShrimpPriceDataSource)
 class ShrimpPriceDataSourceImpl implements ShrimpPriceDataSource {
   final ApiHelper apiHelper;
 
