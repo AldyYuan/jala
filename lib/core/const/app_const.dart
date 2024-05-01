@@ -1,6 +1,6 @@
 class AppConst {
   // App Information
-  static const String appName = 'Jala';
+  static const String appName = 'Jala Media';
   static const String appVersion = '1.0.0';
 
   // Api URLS
