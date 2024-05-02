@@ -5,7 +5,12 @@ import 'package:jala/domain/entities/shrimp_price_entity.dart';
 
 class ShrimpPriceListCard extends StatelessWidget {
   final ShrimpPriceEntity data;
-  const ShrimpPriceListCard({super.key, required this.data});
+  final int shrimpSizeFilter;
+  const ShrimpPriceListCard({
+    super.key,
+    required this.data,
+    required this.shrimpSizeFilter,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +35,21 @@ class ShrimpPriceListCard extends StatelessWidget {
                       const SizedBox(width: 8),
 
                       // Name
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Supplier',
-                            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                                  color: AppTheme.primaryLight,
-                                ),
-                          ),
-                          Text(
-                            data.creator?.name ?? '-',
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Supplier',
+                              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    color: AppTheme.primaryLight,
+                                  ),
+                            ),
+                            Text(
+                              data.creator?.name ?? '-',
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -100,8 +107,7 @@ class ShrimpPriceListCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        // TODO: Change Size
-                        'size 100',
+                        'size $shrimpSizeFilter',
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: AppTheme.primaryLight,
                             ),
@@ -111,7 +117,7 @@ class ShrimpPriceListCard extends StatelessWidget {
                           locale: data.region.countryId.toLowerCase(),
                           symbol: '${data.currencyId} ',
                           decimalDigits: 0,
-                        ).format(data.size100),
+                        ).format(data.getSizeByFilter(shrimpSizeFilter)),
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ],

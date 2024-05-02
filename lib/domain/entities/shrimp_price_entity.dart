@@ -85,4 +85,49 @@ class ShrimpPriceEntity extends Equatable {
         region,
         creator,
       ];
+
+  num getSizeByFilter(int filterSize) {
+    switch (filterSize) {
+      case 20:
+        return size20;
+      case 30:
+        return size30;
+      case 40:
+        return size40;
+      case 50:
+        return size50;
+      case 60:
+        return size60;
+      case 70:
+        return size70;
+      case 80:
+        return size80;
+      case 90:
+        return size90;
+      case 100:
+        return size100;
+      case 110:
+        return size110;
+      case 120:
+        return size120;
+      case 130:
+        return size130;
+      case 140:
+        return size140;
+      case 150:
+        return size150;
+      case 160:
+        return size160;
+      case 170:
+        return size170;
+      case 180:
+        return size180;
+      case 190:
+        return size190;
+      case 200:
+        return size200;
+      default:
+        return size20;
+    }
+  }
 }

@@ -8,3 +8,9 @@ sealed class ShrimpPriceListEvent extends Equatable {
 }
 
 final class ShrimpPriceListGet extends ShrimpPriceListEvent {}
+
+final class ShrimpPriceListFilterSize extends ShrimpPriceListEvent {
+  final BuildContext context;
+
+  const ShrimpPriceListFilterSize({required this.context});
+}

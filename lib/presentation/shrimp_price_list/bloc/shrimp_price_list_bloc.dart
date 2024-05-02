@@ -1,7 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:jala/domain/entities/region_entity.dart';
 import 'package:jala/domain/entities/shrimp_price_entity.dart';
 import 'package:jala/domain/usecases/get_list_shrimp_price.dart';
+import 'package:jala/presentation/shrimp_price_list/dialogs/shrimp_size_filter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 part 'shrimp_price_list_event.dart';
@@ -15,6 +18,7 @@ class ShrimpPriceListBloc extends Bloc<ShrimpPriceListEvent, ShrimpPriceListStat
 
   ShrimpPriceListBloc({required this.getListShrimpPrice}) : super(const ShrimpPriceListState()) {
     on<ShrimpPriceListGet>(_onShrimpPriceListGet);
+    on<ShrimpPriceListFilterSize>(_onShrimpPriceListFilterSize);
   }
 
   Future<void> _onShrimpPriceListGet(
@@ -62,5 +66,31 @@ class ShrimpPriceListBloc extends Bloc<ShrimpPriceListEvent, ShrimpPriceListStat
         if (refreshController.isLoading && result.isEmpty) refreshController.loadNoData();
       },
     );
+  }
+
+  Future<void> _onShrimpPriceListFilterSize(
+    ShrimpPriceListFilterSize event,
+    Emitter<ShrimpPriceListState> emit,
+  ) async {
+    var res = await showModalBottomSheet(
+      isScrollControlled: true,
+      context: event.context,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.8,
+          maxChildSize: 1,
+          minChildSize: .5,
+          builder: (context, scrollController) {
+            return ShrimpSizeFilter(oldSelected: state.shrimpSizeFilter);
+          },
+        );
+      },
+    );
+
+    if (res != null) {
+      refreshController.requestRefresh();
+      emit(state.copyWith(shrimpSizeFilter: res));
+    }
   }
 }
