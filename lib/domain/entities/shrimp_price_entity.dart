@@ -5,6 +5,7 @@ import 'package:jala/domain/entities/region_entity.dart';
 class ShrimpPriceEntity extends Equatable {
   final int id;
   final int speciesId;
+  final String date;
   final num size20;
   final num size30;
   final num size40;
@@ -24,12 +25,14 @@ class ShrimpPriceEntity extends Equatable {
   final num size180;
   final num size190;
   final num size200;
+  final String currencyId;
   final RegionEntity region;
-  final CreatorEntity creator;
+  final CreatorEntity? creator;
 
   const ShrimpPriceEntity({
     required this.id,
     required this.speciesId,
+    required this.date,
     required this.size20,
     required this.size30,
     required this.size40,
@@ -49,6 +52,7 @@ class ShrimpPriceEntity extends Equatable {
     required this.size180,
     required this.size190,
     required this.size200,
+    required this.currencyId,
     required this.region,
     required this.creator,
   });
@@ -57,6 +61,7 @@ class ShrimpPriceEntity extends Equatable {
   List<Object?> get props => [
         id,
         speciesId,
+        date,
         size20,
         size30,
         size40,
@@ -76,6 +81,7 @@ class ShrimpPriceEntity extends Equatable {
         size180,
         size190,
         size200,
+        currencyId,
         region,
         creator,
       ];

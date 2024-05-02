@@ -4,7 +4,7 @@ class AppConst {
   static const String appVersion = '1.0.0';
 
   // Api URLS
-  static const String baseApiUrl = 'https://app.jala.tech/api/';
+  static const String baseApiUrl = 'https://app.jala.tech/api';
   static const String shrimpPrices = '/shrimp_prices';
   static const String region = '/regions';
   static const String posts = '/posts';

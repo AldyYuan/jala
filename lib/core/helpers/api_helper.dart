@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:jala/core/const/app_const.dart';
 import 'package:jala/core/error/exception.dart';
 
+@injectable
 class ApiHelper {
   final Dio dio;
 

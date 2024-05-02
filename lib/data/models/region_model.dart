@@ -8,6 +8,7 @@ part 'region_model.g.dart';
 class RegionModel extends BaseModel<RegionEntity> {
   String? id;
   String? name;
+  String? countryId;
   String? countryName;
   String? provinceName;
   String? regencyName;
@@ -16,6 +17,7 @@ class RegionModel extends BaseModel<RegionEntity> {
   RegionModel({
     this.id,
     this.name,
+    this.countryId,
     this.countryName,
     this.provinceName,
     this.regencyName,
@@ -27,6 +29,7 @@ class RegionModel extends BaseModel<RegionEntity> {
     return RegionEntity(
       id: id ?? '',
       name: name ?? '',
+      countryId: countryId ?? '',
       countryName: countryName ?? '',
       provinceName: provinceName ?? '',
       regencyName: regencyName ?? '',

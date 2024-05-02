@@ -10,9 +10,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:jala/core/helpers/api_helper.dart' as _i4;
+import 'package:jala/core/helpers/api_helper.dart' as _i3;
 import 'package:jala/data/datasource/disease_datasource.dart' as _i5;
-import 'package:jala/data/datasource/post_datasource.dart' as _i3;
+import 'package:jala/data/datasource/post_datasource.dart' as _i4;
 import 'package:jala/data/datasource/region_datasource.dart' as _i7;
 import 'package:jala/data/datasource/shrimp_price_datasource.dart' as _i6;
 import 'package:jala/data/repositories/disease_repository_impl.dart' as _i11;
@@ -41,20 +41,21 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i3.PostDataSource>(
-        () => _i3.PostDataSourceImpl(gh<_i4.ApiHelper>()));
+    gh.factory<_i3.ApiHelper>(() => _i3.ApiHelper());
+    gh.factory<_i4.PostDataSource>(
+        () => _i4.PostDataSourceImpl(gh<_i3.ApiHelper>()));
     gh.factory<_i5.DiseaseDataSource>(
-        () => _i5.DiseaseDataSourceImpl(gh<_i4.ApiHelper>()));
+        () => _i5.DiseaseDataSourceImpl(gh<_i3.ApiHelper>()));
     gh.factory<_i6.ShrimpPriceDataSource>(
-        () => _i6.ShrimpPriceDataSourceImpl(gh<_i4.ApiHelper>()));
+        () => _i6.ShrimpPriceDataSourceImpl(gh<_i3.ApiHelper>()));
     gh.factory<_i7.RegionDataSource>(
-        () => _i7.RegionDataSourceImpl(gh<_i4.ApiHelper>()));
+        () => _i7.RegionDataSourceImpl(gh<_i3.ApiHelper>()));
     gh.factory<_i8.RegionRepository>(
         () => _i9.RegionRepositoryImpl(gh<_i7.RegionDataSource>()));
     gh.factory<_i10.DiseaseRepository>(
         () => _i11.DiseaseRepositoryImpl(gh<_i5.DiseaseDataSource>()));
     gh.factory<_i12.PostRepository>(
-        () => _i13.PostRepositoryImpl(gh<_i3.PostDataSource>()));
+        () => _i13.PostRepositoryImpl(gh<_i4.PostDataSource>()));
     gh.factory<_i14.GetListPost>(
         () => _i14.GetListPost(gh<_i12.PostRepository>()));
     gh.factory<_i15.ShrimpPriceRepository>(
