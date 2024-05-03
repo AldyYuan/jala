@@ -56,9 +56,6 @@ class ShrimpPriceListPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
 
-                          // Refresh
-                          if (read.refreshController.isRefresh && state.status == ShrimpPriceListStatus.loading) const SizedBox(),
-
                           // Failure
                           if (state.status == ShrimpPriceListStatus.failure) const Text('Something went wrong!'),
 
@@ -108,7 +105,9 @@ class ShrimpPriceListPage extends StatelessWidget {
                     read.add(ShrimpPriceListFilterSize(context: context));
                   },
                   regionFilter: state.regionFilter,
-                  onTapRegionFilter: () {},
+                  onTapRegionFilter: () {
+                    read.add(ShrimpPriceListFilterRegion(context: context));
+                  },
                 );
               },
             ),

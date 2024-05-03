@@ -19,7 +19,9 @@ class ShrimpSizeFilter extends StatelessWidget {
             children: [
               Text(
                 "Size",
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),

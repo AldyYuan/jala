@@ -25,9 +25,19 @@ class TryOtherFeatureSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                SvgPicture.asset('assets/ask Jali.svg'),
+                InkWell(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Clicked")));
+                  },
+                  child: SvgPicture.asset('assets/ask Jali.svg'),
+                ),
                 const SizedBox(width: 16),
-                SvgPicture.asset('assets/Quiz by JALA.svg'),
+                InkWell(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Clicked")));
+                  },
+                  child: SvgPicture.asset('assets/Quiz by JALA.svg'),
+                ),
               ],
             ),
           )

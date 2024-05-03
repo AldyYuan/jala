@@ -14,15 +14,20 @@ class GetListRegion extends BaseUseCase<List<RegionEntity>, GetListRegionParams>
 
   @override
   Future<Either<Failure, List<RegionEntity>>> call(GetListRegionParams params) async {
-    return await repository.getListRegion(search: params.search);
+    return await repository.getListRegion(
+      search: params.search,
+      page: params.page,
+    );
   }
 }
 
 class GetListRegionParams extends Equatable {
   final String search;
+  final int page;
 
   const GetListRegionParams({
     this.search = '',
+    this.page = 1,
   });
 
   @override

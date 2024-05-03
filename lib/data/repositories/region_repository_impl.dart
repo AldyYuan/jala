@@ -12,9 +12,15 @@ class RegionRepositoryImpl implements RegionRepository {
   RegionRepositoryImpl(this.dataSource);
 
   @override
-  Future<Either<Failure, List<RegionEntity>>> getListRegion({String search = ''}) async {
+  Future<Either<Failure, List<RegionEntity>>> getListRegion({
+    String search = '',
+    int page = 1,
+  }) async {
     try {
-      var result = await dataSource.getListRegion(search: search);
+      var result = await dataSource.getListRegion(
+        search: search,
+        page: page,
+      );
       return Right(result.map((e) => e.modelToEntity()).toList());
     } catch (e) {
       return Left(ServerFailure());

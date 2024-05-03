@@ -19,7 +19,7 @@ class ShrimpPriceListState extends Equatable {
     this.data = const <ShrimpPriceEntity>[],
     this.page = 1,
     this.regionFilter,
-    this.shrimpSizeFilter = 20,
+    this.shrimpSizeFilter = 100,
   });
 
   ShrimpPriceListState copyWith({
@@ -33,7 +33,7 @@ class ShrimpPriceListState extends Equatable {
       status: status ?? this.status,
       data: data ?? this.data,
       page: page ?? this.page,
-      regionFilter: regionFilter ?? this.regionFilter,
+      regionFilter: regionFilter,
       shrimpSizeFilter: shrimpSizeFilter ?? this.shrimpSizeFilter,
     );
   }

@@ -48,7 +48,7 @@ class ShrimpPriceListFilter extends StatelessWidget {
                               ),
                         ),
                         Text(
-                          "${shrimpSizeFilter}",
+                          "$shrimpSizeFilter",
                           style: Theme.of(context).textTheme.labelLarge!.copyWith(
                                 color: Colors.white,
                               ),

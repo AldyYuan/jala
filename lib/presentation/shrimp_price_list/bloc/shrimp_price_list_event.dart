@@ -14,3 +14,9 @@ final class ShrimpPriceListFilterSize extends ShrimpPriceListEvent {
 
   const ShrimpPriceListFilterSize({required this.context});
 }
+
+final class ShrimpPriceListFilterRegion extends ShrimpPriceListEvent {
+  final BuildContext context;
+
+  const ShrimpPriceListFilterRegion({required this.context});
+}
