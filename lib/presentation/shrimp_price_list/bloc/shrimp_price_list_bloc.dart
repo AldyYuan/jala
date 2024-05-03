@@ -17,7 +17,7 @@ class ShrimpPriceListBloc extends Bloc<ShrimpPriceListEvent, ShrimpPriceListStat
 
   final GetListShrimpPrice getListShrimpPrice;
 
-  ShrimpPriceListBloc({required this.getListShrimpPrice}) : super(const ShrimpPriceListState()) {
+  ShrimpPriceListBloc(this.getListShrimpPrice) : super(const ShrimpPriceListState()) {
     on<ShrimpPriceListGet>(_onShrimpPriceListGet);
     on<ShrimpPriceListFilterSize>(_onShrimpPriceListFilterSize);
     on<ShrimpPriceListFilterRegion>(_onShrimpPriceListFilterRegion);

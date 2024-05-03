@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jala/core/themes/app_theme.dart';
+import 'package:jala/core/widgets/verification_status_chip.dart';
 import 'package:jala/domain/entities/shrimp_price_entity.dart';
+import 'package:jala/presentation/shrimp_price_detail/page/shrimp_price_detail_page.dart';
 
 class ShrimpPriceListCard extends StatelessWidget {
   final ShrimpPriceEntity data;
@@ -14,125 +16,117 @@ class ShrimpPriceListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card.outlined(
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Supplier
-            Row(
-              children: [
-                // Supplier Detail
-                Expanded(
-                  child: Row(
-                    children: [
-                      // Supplier
-                      CircleAvatar(
-                        backgroundImage: data.creator == null ? null : NetworkImage("https://app.jala.tech/storage/${data.creator!.avatar}"),
-                        radius: 24,
-                      ),
-                      const SizedBox(width: 8),
-
-                      // Name
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Supplier',
-                              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: AppTheme.primaryLight,
-                                  ),
-                            ),
-                            Text(
-                              data.creator?.name ?? '-',
-                            ),
-                          ],
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ShrimpPriceDetailPage(id: data.id),
+        ));
+      },
+      child: Card.outlined(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Supplier
+              Row(
+                children: [
+                  // Supplier Detail
+                  Expanded(
+                    child: Row(
+                      children: [
+                        // Supplier
+                        CircleAvatar(
+                          backgroundImage: data.creator == null ? null : NetworkImage("https://app.jala.tech/storage/${data.creator!.avatar}"),
+                          radius: 24,
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 16),
+                        const SizedBox(width: 8),
 
-                // Verification Status
-                Chip(
-                  label: Text(
-                    (data.creator?.buyer ?? false) ? "Terverifikasi" : "Belum Terverifikasi",
-                    style: Theme.of(context).textTheme.labelSmall,
+                        // Name
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Supplier',
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                      color: AppTheme.primaryLight,
+                                    ),
+                              ),
+                              Text(
+                                data.creator?.name ?? '-',
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  avatar: (data.creator?.buyer ?? false) ? const Icon(Icons.star_rounded, color: Colors.amber) : null,
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  visualDensity: VisualDensity.compact,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  labelPadding: EdgeInsets.zero,
-                  backgroundColor: (data.creator?.buyer ?? false) ? AppTheme.yellowBgColor : AppTheme.disableBgColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32),
-                    side: const BorderSide(color: Colors.transparent),
+                  const SizedBox(width: 16),
+
+                  // Verification Status
+                  VerificationStatusChip(isVerified: data.creator?.buyer ?? false),
+                ],
+              ),
+              const SizedBox(height: 8),
+
+              // Detail
+              // Date
+              Text(
+                DateFormat("dd MMMM yyyy").format(DateTime.parse(data.date)),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: AppTheme.primaryLight,
+                    ),
+              ),
+              const SizedBox(height: 4),
+
+              // Region
+              Text(
+                data.region.provinceName,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              Text(
+                data.region.name,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 4),
+
+              // Price & Detail
+              Row(
+                children: [
+                  // price
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'size $shrimpSizeFilter',
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                color: AppTheme.primaryLight,
+                              ),
+                        ),
+                        Text(
+                          NumberFormat.currency(
+                            locale: data.region.countryId.toLowerCase(),
+                            symbol: '${data.currencyId} ',
+                            decimalDigits: 0,
+                          ).format(data.getSizeByFilter(shrimpSizeFilter)),
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
+                  const SizedBox(width: 16),
 
-            // Detail
-            // Date
-            Text(
-              DateFormat("dd MMMM yyyy").format(DateTime.parse(data.date)),
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: AppTheme.primaryLight,
+                  // Verification Status
+                  FilledButton(
+                    onPressed: () {},
+                    child: const Text("Lihat Detail"),
                   ),
-            ),
-            const SizedBox(height: 4),
-
-            // Region
-            Text(
-              data.region.provinceName,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            Text(
-              data.region.name,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 4),
-
-            // Price & Detail
-            Row(
-              children: [
-                // price
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'size $shrimpSizeFilter',
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                              color: AppTheme.primaryLight,
-                            ),
-                      ),
-                      Text(
-                        NumberFormat.currency(
-                          locale: data.region.countryId.toLowerCase(),
-                          symbol: '${data.currencyId} ',
-                          decimalDigits: 0,
-                        ).format(data.getSizeByFilter(shrimpSizeFilter)),
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 16),
-
-                // Verification Status
-                FilledButton(
-                  onPressed: () {},
-                  child: const Text("Lihat Detail"),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

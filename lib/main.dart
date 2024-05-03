@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jala/core/const/app_const.dart';
 import 'package:jala/core/injection/injection.dart';
 import 'package:jala/core/themes/app_theme.dart';
+import 'package:jala/presentation/shrimp_price_detail/bloc/shrimp_price_detail_bloc.dart';
 import 'package:jala/presentation/shrimp_price_list/bloc/shrimp_price_list_bloc.dart';
+import 'package:jala/presentation/shrimp_price_list/dialogs/shrimp_region_filter/bloc/shrimp_region_filter_bloc.dart';
 import 'package:jala/presentation/shrimp_price_list/page/shrimp_price_list_page.dart';
 
 void main() {
@@ -22,9 +24,12 @@ class MyApp extends StatelessWidget {
       providers: [
         // Shrimp Price List Bloc
         BlocProvider<ShrimpPriceListBloc>(
-          create: (context) => ShrimpPriceListBloc(
-            getListShrimpPrice: getIt(),
-          ),
+          create: (context) => ShrimpPriceListBloc(getIt()),
+        ),
+
+        // Shrimp Region Filter Bloc
+        BlocProvider<ShrimpRegionFilterBloc>(
+          create: (context) => ShrimpRegionFilterBloc(getIt()),
         ),
       ],
       child: MaterialApp(
