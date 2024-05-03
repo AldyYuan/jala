@@ -52,6 +52,7 @@ class ShrimpPriceListPage extends StatelessWidget {
                             "Harga Terbaru",
                             style: Theme.of(context).textTheme.titleMedium!.copyWith(
                                   color: AppTheme.primaryDarker,
+                                  fontWeight: FontWeight.bold,
                                 ),
                           ),
                           const SizedBox(height: 8),

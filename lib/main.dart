@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:jala/core/const/app_const.dart';
 import 'package:jala/core/injection/injection.dart';
 import 'package:jala/core/themes/app_theme.dart';
-import 'package:jala/presentation/shrimp_price_detail/bloc/shrimp_price_detail_bloc.dart';
+import 'package:jala/presentation/shrimp_post/bloc/shrimp_post_bloc.dart';
+import 'package:jala/presentation/shrimp_post/page/shrimp_post_page.dart';
 import 'package:jala/presentation/shrimp_price_list/bloc/shrimp_price_list_bloc.dart';
 import 'package:jala/presentation/shrimp_price_list/dialogs/shrimp_region_filter/bloc/shrimp_region_filter_bloc.dart';
 import 'package:jala/presentation/shrimp_price_list/page/shrimp_price_list_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  initializeDateFormatting('id_ID');
   configureDependencies();
 
   runApp(const MyApp());
@@ -30,6 +33,11 @@ class MyApp extends StatelessWidget {
         // Shrimp Region Filter Bloc
         BlocProvider<ShrimpRegionFilterBloc>(
           create: (context) => ShrimpRegionFilterBloc(getIt()),
+        ),
+
+        // Shrimp Post Bloc
+        BlocProvider<ShrimpPostBloc>(
+          create: (context) => ShrimpPostBloc(getIt()),
         ),
       ],
       child: MaterialApp(
@@ -71,9 +79,7 @@ class MainPage extends StatelessWidget {
               child: TabBarView(
                 children: [
                   const ShrimpPriceListPage(),
-                  Container(
-                    color: Colors.blue,
-                  ),
+                  const ShrimpPostPage(),
                   Container(
                     color: Colors.green,
                   ),

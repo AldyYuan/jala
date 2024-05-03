@@ -73,7 +73,7 @@ class ShrimpPriceListCard extends StatelessWidget {
               // Detail
               // Date
               Text(
-                DateFormat("dd MMMM yyyy").format(DateTime.parse(data.date)),
+                DateFormat("dd MMMM yyyy", 'id_ID').format(DateTime.parse(data.date)),
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: AppTheme.primaryLight,
                     ),

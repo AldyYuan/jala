@@ -83,7 +83,7 @@ class ShrimpPriceDetailPage extends StatelessWidget {
                                 children: [
                                   // Date
                                   Text(
-                                    DateFormat("dd MMMM yyyy").format(DateTime.parse(state.data?.date ?? "")),
+                                    DateFormat("dd MMMM yyyy", 'id_ID').format(DateTime.parse(state.data?.date ?? "")),
                                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                                         ),
