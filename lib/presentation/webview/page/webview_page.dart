@@ -6,19 +6,19 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatelessWidget {
   final String titlePage;
-  final String webviewUrl;
+  final String webViewUrl;
   final String shareUrl;
   const WebViewPage({
     super.key,
     required this.titlePage,
-    required this.webviewUrl,
+    required this.webViewUrl,
     required this.shareUrl,
   });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WebViewBloc()..add(WebViewInitController(webviewUrl: webviewUrl)),
+      create: (context) => WebViewBloc()..add(WebViewInitController(webviewUrl: webViewUrl)),
       child: BlocBuilder<WebViewBloc, WebViewState>(
         builder: (context, state) {
           return Scaffold(

@@ -13,7 +13,7 @@ part 'shrimp_price_list_state.dart';
 
 class ShrimpPriceListBloc extends Bloc<ShrimpPriceListEvent, ShrimpPriceListState> {
   // Refresh Controller
-  final RefreshController refreshController = RefreshController(initialRefresh: true);
+  final RefreshController refreshController = RefreshController();
 
   final GetListShrimpPrice getListShrimpPrice;
 

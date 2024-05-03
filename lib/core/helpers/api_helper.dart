@@ -36,9 +36,13 @@ class ApiHelper {
 
       String urlPath = '${AppConst.baseApiUrl}$path';
 
-      final Response res = await dio.get(
+      final Response res = await dio.request(
         urlPath,
         queryParameters: query,
+        options: Options(
+          method: 'GET',
+          headers: headers,
+        ),
       );
 
       List<String> print = [

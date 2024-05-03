@@ -4,6 +4,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:jala/core/const/app_const.dart';
 import 'package:jala/core/injection/injection.dart';
 import 'package:jala/core/themes/app_theme.dart';
+import 'package:jala/presentation/shrimp_disease/bloc/shrimp_disease_bloc.dart';
+import 'package:jala/presentation/shrimp_disease/page/shrimp_disease_page.dart';
 import 'package:jala/presentation/shrimp_post/bloc/shrimp_post_bloc.dart';
 import 'package:jala/presentation/shrimp_post/page/shrimp_post_page.dart';
 import 'package:jala/presentation/shrimp_price_list/bloc/shrimp_price_list_bloc.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
       providers: [
         // Shrimp Price List Bloc
         BlocProvider<ShrimpPriceListBloc>(
-          create: (context) => ShrimpPriceListBloc(getIt()),
+          create: (context) => ShrimpPriceListBloc(getIt())..add(ShrimpPriceListGet()),
         ),
 
         // Shrimp Region Filter Bloc
@@ -37,7 +39,12 @@ class MyApp extends StatelessWidget {
 
         // Shrimp Post Bloc
         BlocProvider<ShrimpPostBloc>(
-          create: (context) => ShrimpPostBloc(getIt()),
+          create: (context) => ShrimpPostBloc(getIt())..add(ShrimpPostGet()),
+        ),
+
+        // Shrimp Disease Bloc
+        BlocProvider<ShrimpDiseaseBloc>(
+          create: (context) => ShrimpDiseaseBloc(getIt())..add(ShrimpDiseaseGet()),
         ),
       ],
       child: MaterialApp(
@@ -62,10 +69,10 @@ class MainPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text(AppConst.appName),
         ),
-        body: Column(
+        body: const Column(
           children: [
             // Tab Bar
-            const TabBar(
+            TabBar(
               indicatorSize: TabBarIndicatorSize.tab,
               tabs: [
                 Tab(text: 'Harga Udang'),
@@ -78,11 +85,9 @@ class MainPage extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  const ShrimpPriceListPage(),
-                  const ShrimpPostPage(),
-                  Container(
-                    color: Colors.green,
-                  ),
+                  ShrimpPriceListPage(),
+                  ShrimpPostPage(),
+                  ShrimpDiseasePage(),
                 ],
               ),
             ),

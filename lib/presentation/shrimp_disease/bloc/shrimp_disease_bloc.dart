@@ -1,25 +1,25 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:jala/domain/entities/post_entity.dart';
-import 'package:jala/domain/usecases/get_list_post.dart';
+import 'package:jala/domain/entities/disease_entity.dart';
+import 'package:jala/domain/usecases/get_list_disease.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-part 'shrimp_post_event.dart';
-part 'shrimp_post_state.dart';
+part 'shrimp_disease_event.dart';
+part 'shrimp_disease_state.dart';
 
-class ShrimpPostBloc extends Bloc<ShrimpPostEvent, ShrimpPostState> {
+class ShrimpDiseaseBloc extends Bloc<ShrimpDiseaseEvent, ShrimpDiseaseState> {
   // Refresh Controller
   final RefreshController refreshController = RefreshController();
 
-  final GetListPost getListPost;
+  final GetListDisease getListDisease;
 
-  ShrimpPostBloc(this.getListPost) : super(const ShrimpPostState()) {
-    on<ShrimpPostGet>(_onShrimpPostGet);
+  ShrimpDiseaseBloc(this.getListDisease) : super(const ShrimpDiseaseState()) {
+    on<ShrimpDiseaseGet>(_onShrimpDiseaseGet);
   }
 
-  Future<void> _onShrimpPostGet(
-    ShrimpPostGet event,
-    Emitter<ShrimpPostState> emit,
+  Future<void> _onShrimpDiseaseGet(
+    ShrimpDiseaseGet event,
+    Emitter<ShrimpDiseaseState> emit,
   ) async {
     // Refresh
     if (refreshController.isRefresh) {
@@ -32,26 +32,26 @@ class ShrimpPostBloc extends Bloc<ShrimpPostEvent, ShrimpPostState> {
       );
     }
 
-    emit(state.copyWith(status: ShrimpPostStatus.loading));
+    emit(state.copyWith(status: ShrimpDiseaseStatus.loading));
 
-    var either = await getListPost(
-      GetListPostParams(
+    var either = await getListDisease(
+      GetListDiseaseParams(
         page: state.page,
       ),
     );
 
     either.fold(
       (l) {
-        emit(state.copyWith(status: ShrimpPostStatus.failure));
+        emit(state.copyWith(status: ShrimpDiseaseStatus.failure));
 
         if (refreshController.isRefresh) refreshController.refreshFailed();
         if (refreshController.isLoading) refreshController.loadFailed();
       },
       (r) {
-        final List<PostEntity> result = r;
+        final List<DiseaseEntity> result = r;
 
         emit(state.copyWith(
-          status: ShrimpPostStatus.success,
+          status: ShrimpDiseaseStatus.success,
           data: List.of(state.data)..addAll(result),
           page: state.page + 1,
         ));

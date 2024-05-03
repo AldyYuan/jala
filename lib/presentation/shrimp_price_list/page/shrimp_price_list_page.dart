@@ -57,6 +57,10 @@ class ShrimpPriceListPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
 
+                          // First Loading
+                          if (state.status == ShrimpPriceListStatus.loading && state.data.isEmpty && !read.refreshController.isRefresh)
+                            const LinearProgressIndicator(),
+
                           // Failure
                           if (state.status == ShrimpPriceListStatus.failure) const Text('Something went wrong!'),
 
